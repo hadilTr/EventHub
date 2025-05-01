@@ -1,0 +1,37 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- Cercle extérieur -->
+    <path
+        android:fillColor="#FF5722"
+        android:pathData="M100,100m-90,0a90,90 0,1 1,180 0a90,90 0,1 1,-180 0" />
+
+    <!-- Cercle intérieur -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M100,100m-75,0a75,75 0,1 1,150 0a75,75 0,1 1,-150 0" />
+
+    <!-- Masque de théâtre stylisé -->
+    <path
+        android:fillColor="#FF5722"
+        android:pathData="M100,50 C70,50 50,80 50,110 C50,140 70,150 100,150 C130,150 150,140 150,110 C150,80 130,50 100,50 Z" />
+
+    <!-- Détails du masque -->
+    <path
+        android:fillColor="#3F51B5"
+        android:pathData="M75,90 C65,90 65,110 75,110 C85,110 85,90 75,90 Z" />
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M125,90 C115,90 115,110 125,110 C135,110 135,90 125,90 Z" />
+
+    <!-- Sourire -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:pathData="M75,120 Q100,140 125,120" />
+</vector>

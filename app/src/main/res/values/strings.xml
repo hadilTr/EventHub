@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SpectacleBooking</string>
+    <string name="spectacle_poster"></string>
+    <string name="back">Back</string>
+    <string name="book_now">Book Now</string>
+
+
+    <string name="profile_picture">Photo de profil</string>
+    <string name="change_photo">Changer la photo</string>
+    <string name="personal_info">Informations personnelles</string>
+    <string name="edit_profile">Modifier le profil</string>
+
+</resources>

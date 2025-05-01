@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Fond gradient avec dégradé violet/orchidé -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="135"
+                android:startColor="#6a11cb"
+                android:endColor="#2575fc"
+                android:type="linear" />
+        </shape>
+    </item>
+
+    <!-- Motif de vague subtile -->
+    <item android:top="200dp">
+        <shape android:shape="rectangle">
+            <size android:height="300dp" />
+            <bitmap
+                android:src="@drawable/wave_pattern"
+                android:tileMode="repeat"
+                android:alpha="0.15" />
+        </shape>
+    </item>
+
+    <!-- Points lumineux décoratifs -->
+    <item>
+        <shape android:shape="oval">
+            <size android:width="400dp" android:height="400dp" />
+            <solid android:color="#FFFFFF" android:alpha="0.04" />
+        </shape>
+    </item>
+    <item android:left="200dp" android:top="300dp">
+        <shape android:shape="oval">
+            <size android:width="200dp" android:height="200dp" />
+            <solid android:color="#FFFFFF" android:alpha="0.03" />
+        </shape>
+    </item>
+</layer-list>
