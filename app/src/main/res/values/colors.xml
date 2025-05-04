@@ -23,4 +23,6 @@
     <color name="background_color">#F5F5F5</color>
     <color name="text_primary">#212121</color>
     <color name="text_secondary">#757575</color>
+    <color name="material_dynamic_primary40">#FF0000</color> <!-- example -->
+
 </resources>

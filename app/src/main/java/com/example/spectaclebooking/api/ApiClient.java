@@ -7,7 +7,7 @@ public class ApiClient {
     private static Retrofit retrofit;
 
     // Replace with your actual base URL
-    private static final String BASE_URL = "http://10.0.2.2:8083/";
+    private static final String BASE_URL = "http://192.168.100.7:8083/";
 
     public static Retrofit getClient() {
         if (retrofit == null) {

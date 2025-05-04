@@ -51,7 +51,6 @@ public class SpectacleDetailActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RepresentationAdapter adapter;
     private List<Representation> representationList = new ArrayList<>(); // <-- init vide
-    private RecyclerView recyclerViewRubriques;
 
 
     private Long spectacleId;
@@ -80,7 +79,17 @@ public class SpectacleDetailActivity extends AppCompatActivity {
 
         spectacleId = getIntent().getLongExtra("spectacle_id", -1);
         fetchSpectacleDetails();
-
+        findViewById(R.id.buttonReserve).setOnClickListener(v -> {
+            Representation selectedRepresentation = adapter.getSelectedRepresentation();
+            if (selectedRepresentation != null) {
+                Intent intent = new Intent(SpectacleDetailActivity.this, BilletActivity.class);
+                System.out.println("Representation id: " + selectedRepresentation.getId());
+                intent.putExtra("representation_id", selectedRepresentation.getId());
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Veuillez sélectionner une représentation.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         if (spectacleId != -1) {
             fetchRepresentations();
@@ -186,6 +195,8 @@ public class SpectacleDetailActivity extends AppCompatActivity {
         byte[] decodedString = android.util.Base64.decode(base64Image, android.util.Base64.DEFAULT);
         return android.graphics.BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
+
+
 
 
 
