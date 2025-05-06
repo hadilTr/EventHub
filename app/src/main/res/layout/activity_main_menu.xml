@@ -47,9 +47,6 @@
                     android:layout_height="0dp"
                     android:layout_weight="1" />
 
-                <!-- Icône de profil/login ajoutée -->
-
-
                 <!-- Icône de recherche existante -->
                 <ImageButton
                     android:id="@+id/searchBar"
@@ -70,9 +67,7 @@
             app:tabMode="scrollable"
             app:tabSelectedTextColor="@android:color/white"
             app:tabTextColor="@android:color/white"
-            android:background="@android:color/transparent"
-            >
-
+            android:background="@android:color/transparent">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
@@ -106,10 +101,13 @@
             android:layout_height="wrap_content"
             android:queryHint="Rechercher par titre"
             android:visibility="gone"
-            android:background="@android:color/white"
+            android:background="@color/white"
             android:iconifiedByDefault="false"
-            android:layout_marginHorizontal="8dp"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="12dp"
+            android:elevation="4dp"
+            android:padding="8dp" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -141,7 +139,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Spectacles à l'affiche"
+                    android:text="Liste de spectacles"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
@@ -154,8 +152,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clipToPadding="false" />
-
-
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/eventsRecyclerView"

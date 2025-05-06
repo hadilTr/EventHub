@@ -5,41 +5,51 @@
     android:orientation="vertical"
     android:padding="24dp"
     android:gravity="center"
-    android:background="@drawable/dialog_background">
+    android:background="@drawable/dialog_background"
+    android:elevation="8dp">
 
     <TextView
         android:id="@+id/successText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Paiement en cours..."
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginBottom="24dp"
-        android:textColor="@android:color/black"/>
+        android:letterSpacing="0.02"
+        android:layout_marginBottom="32dp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:fontFamily="sans-serif-medium"/>
 
     <ProgressBar
         android:id="@+id/loader"
         style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminate="true" />
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/black"/>
 
     <ImageView
         android:id="@+id/tick"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:src="@drawable/tick_ok"
         android:visibility="gone"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="16dp"
+        android:scaleType="centerInside"/>
 
     <Button
         android:id="@+id/btnOk"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:text="OK"
         android:visibility="gone"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
+        android:paddingHorizontal="24dp"
         android:backgroundTint="@color/black"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:textAllCaps="false"
+        android:fontFamily="sans-serif"
+        android:letterSpacing="0.03"
+        android:elevation="4dp"/>
 
 </LinearLayout>

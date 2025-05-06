@@ -4,17 +4,19 @@
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="12dp"
-    card_view:cardCornerRadius="12dp"
-    card_view:cardElevation="4dp"
-    card_view:strokeWidth="4dp"
-    card_view:strokeColor="@android:color/transparent">
+    android:layout_margin="16dp"
+    card_view:cardBackgroundColor="#FFFFFF"
+    card_view:cardCornerRadius="16dp"
+    card_view:cardElevation="6dp"
+    card_view:strokeWidth="1dp"
+    card_view:strokeColor="#E0E0E0">
 
     <LinearLayout
         android:orientation="vertical"
-        android:padding="16dp"
+        android:padding="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/black">
 
         <!-- Lieu + icône -->
         <RelativeLayout
@@ -25,7 +27,8 @@
                 android:id="@+id/tvLieu"
                 android:text="Lieu"
                 android:textStyle="bold"
-                android:textSize="18sp"
+                android:textSize="20sp"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"/>
@@ -33,19 +36,23 @@
             <ImageView
                 android:id="@+id/ivMaps"
                 android:src="@drawable/location"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="12dp"
                 android:contentDescription="Ouvrir dans Google Maps"
                 android:clickable="true"
-                android:focusable="true"/>
+                android:focusable="true"
+                card_view:tint="@color/white" />
         </RelativeLayout>
 
         <TextView
             android:id="@+id/tvDate"
             android:text="Date"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#FFFFF0"
+            android:layout_marginTop="8dp"/>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
