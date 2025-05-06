@@ -48,15 +48,7 @@
                     android:layout_weight="1" />
 
                 <!-- Icône de profil/login ajoutée -->
-                <ImageButton
-                    android:id="@+id/loginButton"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Se connecter"
-                    android:src="@drawable/ic_person"
-                    app:tint="@android:color/white"
-                    android:layout_marginEnd="8dp" />
+
 
                 <!-- Icône de recherche existante -->
                 <ImageButton
@@ -81,6 +73,7 @@
             android:background="@android:color/transparent"
             >
 
+
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -89,7 +82,7 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Concerts" />
+                android:text="Comédie" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
@@ -99,13 +92,25 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Danse" />
+                android:text="Dance" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Humour" />
         </com.google.android.material.tabs.TabLayout>
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:queryHint="Rechercher par titre"
+            android:visibility="gone"
+            android:background="@android:color/white"
+            android:iconifiedByDefault="false"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginBottom="8dp" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <!-- ProgressBar pour indiquer le chargement -->
@@ -150,16 +155,7 @@
                     android:layout_height="wrap_content"
                     android:clipToPadding="false" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Événements à venir"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp" />
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/eventsRecyclerView"

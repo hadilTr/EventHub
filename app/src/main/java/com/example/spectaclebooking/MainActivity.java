@@ -31,14 +31,14 @@ public class MainActivity extends AppCompatActivity {
         TextView appName = findViewById(R.id.appName);
         TextView appSlogan = findViewById(R.id.appSlogan);
         MaterialButton getStartedButton = findViewById(R.id.getStartedButton);
-        MaterialButton loginButton = findViewById(R.id.loginButton);
+
 
         // Animer l'apparition des éléments
         appLogo.setAlpha(0f);
         appName.setAlpha(0f);
         appSlogan.setAlpha(0f);
         getStartedButton.setAlpha(0f);
-        loginButton.setAlpha(0f);
+
 
         // Animation du logo
         appLogo.animate()
@@ -69,11 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 .start();
 
         // Animation du bouton de connexion
-        loginButton.animate()
-                .alpha(1f)
-                .setDuration(1000)
-                .setStartDelay(1500)
-                .start();
+
 
         // Animation au clic sur le bouton principal
         getStartedButton.setOnClickListener(view -> {
@@ -88,15 +84,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Animation au clic sur le bouton de connexion
-        loginButton.setOnClickListener(view -> {
-            Animation pulse = AnimationUtils.loadAnimation(this, R.anim.pulse);
-            view.startAnimation(pulse);
 
-            new Handler().postDelayed(() -> {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, android.R.anim.fade_out);
-            }, 300);
-        });
     }
 }

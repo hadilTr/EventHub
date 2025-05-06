@@ -22,7 +22,7 @@ import java.util.List;
 public class SpectacleAdapter extends RecyclerView.Adapter<SpectacleAdapter.ViewHolder> {
 
     private final Context context;
-    private final List<SpectacleHomeDTO> spectacleList;
+    private List<SpectacleHomeDTO> spectacleList;
     private final OnItemClickListener listener;
 
     public interface OnItemClickListener {
@@ -78,6 +78,11 @@ public class SpectacleAdapter extends RecyclerView.Adapter<SpectacleAdapter.View
     @Override
     public int getItemCount() {
         return spectacleList.size();
+    }
+
+    public void updateList(List<SpectacleHomeDTO> newList) {
+        this.spectacleList = newList;
+        notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

@@ -2,6 +2,7 @@ package com.example.spectaclebooking;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -30,13 +31,12 @@ public class MainMenuActivity extends AppCompatActivity {
     private RecyclerView spectaclesRecyclerView;
     private RecyclerView eventsRecyclerView;
     private SpectacleAdapter spectacleAdapter;
-
     private List<SpectacleHomeDTO> spectacleList;
-
     private TabLayout tabLayout;
     private ImageButton searchBar;
     private FloatingActionButton fabFilter;
     private Context context;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,26 +48,44 @@ public class MainMenuActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabLayout);
         searchBar = findViewById(R.id.searchBar);
         fabFilter = findViewById(R.id.fabFilter);
-        context=this;
+        searchView = findViewById(R.id.searchView);
+        context = this;
 
         // Configuration du RecyclerView pour les spectacles
         spectaclesRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         spectaclesRecyclerView.setHasFixedSize(true);
 
-        // Configuration du RecyclerView pour les événements
-
         // Chargement des données
         loadSpectacles();
 
-
-        // Gestion des clics
+        // Toggle SearchView visibility on searchBar click
         searchBar.setOnClickListener(v -> {
-            Intent intent = new Intent(MainMenuActivity.this, SpectacleDetailActivity.class);
-            startActivity(intent);
+            if (searchView.getVisibility() == View.GONE) {
+                searchView.setVisibility(View.VISIBLE);
+                searchView.setIconified(false); // Expand SearchView
+                searchView.requestFocus(); // Show keyboard
+            } else {
+                searchView.setVisibility(View.GONE);
+                searchView.setQuery("", false); // Clear query
+                searchView.clearFocus(); // Hide keyboard
+                filterSpectacles(""); // Reset to full list
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterSpectacles(newText);
+                return true;
+            }
         });
 
         fabFilter.setOnClickListener(v -> {
-            // Afficher un dialogue de filtre
             showFilterDialog();
         });
 
@@ -80,63 +98,66 @@ public class MainMenuActivity extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                // Non utilisé
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                // Non utilisé
             }
         });
     }
 
+    private void loadSpectacles() {
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
+        Call<List<SpectacleHomeDTO>> call = apiService.getAllSpectacles();
 
-        private void loadSpectacles() {
-
-            ApiService apiService = ApiClient.getClient().create(ApiService.class);
-            Call<List<SpectacleHomeDTO>> call = apiService.getAllSpectacles();
-
-            call.enqueue(new Callback<List<SpectacleHomeDTO>>() {
-                @Override
-                public void onResponse(Call<List<SpectacleHomeDTO>> call, Response<List<SpectacleHomeDTO>> response) {
-                    if (response.isSuccessful() && response.body() != null) {
-                        spectacleList = response.body();
-                        spectacleAdapter = new SpectacleAdapter(context, spectacleList, spectacle -> {
-                            Intent intent = new Intent(context, SpectacleDetailActivity.class); // 👈 Go to representations
-                            intent.putExtra("spectacle_id", spectacle.getId());
-                            startActivity(intent);
-                        });
-
-                        spectaclesRecyclerView.setAdapter(spectacleAdapter);
-
-                    } else {
-                        Toast.makeText(MainMenuActivity.this, "Erreur lors du chargement des spectacles", Toast.LENGTH_SHORT).show();
-                    }
+        call.enqueue(new Callback<List<SpectacleHomeDTO>>() {
+            @Override
+            public void onResponse(Call<List<SpectacleHomeDTO>> call, Response<List<SpectacleHomeDTO>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    spectacleList = response.body();
+                    spectacleAdapter = new SpectacleAdapter(context, spectacleList, spectacle -> {
+                        Intent intent = new Intent(context, SpectacleDetailActivity.class);
+                        intent.putExtra("spectacle_id", spectacle.getId());
+                        startActivity(intent);
+                    });
+                    spectaclesRecyclerView.setAdapter(spectacleAdapter);
+                } else {
+                    Toast.makeText(MainMenuActivity.this, "Erreur lors du chargement des spectacles", Toast.LENGTH_SHORT).show();
                 }
+            }
 
-                @Override
-                public void onFailure(Call<List<SpectacleHomeDTO>> call, Throwable t) {
-                    Toast.makeText(MainMenuActivity.this, "Échec de connexion au serveur", Toast.LENGTH_SHORT).show();
-                    Log.e("API_ERROR", t.getMessage(), t);
-                }
-            });
-            
+            @Override
+            public void onFailure(Call<List<SpectacleHomeDTO>> call, Throwable t) {
+                Toast.makeText(MainMenuActivity.this, "Échec de connexion au serveur", Toast.LENGTH_SHORT).show();
+                Log.e("API_ERROR", t.getMessage(), t);
+            }
+        });
+    }
 
-        // Création et configuration de l'adaptateur
-
+    private void filterSpectacles(String query) {
+        List<SpectacleHomeDTO> filteredList = new ArrayList<>();
+        for (SpectacleHomeDTO spectacle : spectacleList) {
+            if (spectacle.getTitre().toLowerCase().contains(query.toLowerCase())) {
+                filteredList.add(spectacle);
+            }
+        }
+        spectacleAdapter = new SpectacleAdapter(context, filteredList, spectacle -> {
+            Intent intent = new Intent(context, SpectacleDetailActivity.class);
+            intent.putExtra("spectacle_id", spectacle.getId());
+            startActivity(intent);
+        });
+        spectaclesRecyclerView.setAdapter(spectacleAdapter);
     }
 
     private void filterSpectaclesByCategory(int tabPosition) {
-        // Filtrer les spectacles en fonction de l'onglet sélectionné
         List<SpectacleHomeDTO> filteredList = new ArrayList<>();
-
         switch (tabPosition) {
             case 0: // Tous
                 filteredList.addAll(spectacleList);
                 break;
             case 1: // Concerts
                 for (SpectacleHomeDTO spectacle : spectacleList) {
-                    if (spectacle.getTypeSpectacle().equals("Concert")) {
+                    if (spectacle.getTypeSpectacle().equals("Comédie")) {
                         filteredList.add(spectacle);
                     }
                 }
@@ -149,10 +170,10 @@ public class MainMenuActivity extends AppCompatActivity {
                     }
                 }
                 break;
-            case 3: // Danse
+            case 3: // Dance
                 for (SpectacleHomeDTO spectacle : spectacleList) {
                     if (spectacle.getTypeSpectacle().equals("Ballet") ||
-                            spectacle.getTypeSpectacle().equals("Danse")) {
+                            spectacle.getTypeSpectacle().equals("Dance")) {
                         filteredList.add(spectacle);
                     }
                 }
@@ -165,21 +186,15 @@ public class MainMenuActivity extends AppCompatActivity {
                 }
                 break;
         }
-
-        // Mettre à jour l'adaptateur avec la liste filtrée
-
-
         spectacleAdapter = new SpectacleAdapter(context, filteredList, spectacle -> {
-            Intent intent = new Intent(context, SpectacleDetailActivity.class); // 👈 Go to representations
+            Intent intent = new Intent(context, SpectacleDetailActivity.class);
             intent.putExtra("spectacle_id", spectacle.getId());
             startActivity(intent);
-
         });
         spectaclesRecyclerView.setAdapter(spectacleAdapter);
     }
 
     private void showFilterDialog() {
         // Cette méthode afficherait un dialogue de filtre
-        // Pour simplifier, nous ne l'implémentons pas complètement ici
     }
 }

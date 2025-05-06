@@ -15,9 +15,9 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface ApiService {
-    Call<SignupResponse> registerClient(SignupRequest request);
 
-    @GET("api/spectacles")
+
+    @GET("/api/spectacles")
     Call<List<SpectacleHomeDTO>> getAllSpectacles();
 
     @GET("/api/spectacles/{id}")

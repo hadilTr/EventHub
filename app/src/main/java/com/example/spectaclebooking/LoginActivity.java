@@ -1,4 +1,4 @@
-package com.example.spectaclebooking;
+/*package com.example.spectaclebooking;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -87,10 +87,10 @@ public class LoginActivity extends AppCompatActivity {
             Animation buttonAnimation = AnimationUtils.loadAnimation(this, R.anim.button_animation);
             v.startAnimation(buttonAnimation);
             Toast.makeText(this, "Connexion avec Facebook (à implémenter)", Toast.LENGTH_SHORT).show();
-        });
+        });}}
 
         // Configurer le lien d'inscription
-        textRegister.setOnClickListener(v -> {
+        /**textRegister.setOnClickListener(v -> {
             startActivity(new Intent(this, RegisterActivity.class));
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
@@ -106,4 +106,4 @@ public class LoginActivity extends AppCompatActivity {
         // Exemple basique - À adapter avec votre système d'authentification
         return email.equals("client@gmail.com") && password.equals("password123");
     }
-}
+*/

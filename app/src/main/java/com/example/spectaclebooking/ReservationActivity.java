@@ -62,6 +62,7 @@ public class ReservationActivity extends AppCompatActivity {
 
         editCustomer = findViewById(R.id.editCustomer);
         editEmail = findViewById(R.id.editEmail);
+        editPhone=findViewById(R.id.editPhone);
         NumCompte = findViewById(R.id.NumCompte);
         CVV = findViewById(R.id.CVV);
         payButton = findViewById(R.id.buttonConfirm);
@@ -106,7 +107,7 @@ public class ReservationActivity extends AppCompatActivity {
 
                 String email = editEmail.getText().toString().trim();
                 String fullName = editCustomer.getText().toString().trim();
-                String tel=editPhone.getText().toString().trim();
+                //String tel=editPhone.getText().toString().trim();
 
 
                 // Create enhanced request
@@ -216,7 +217,7 @@ public class ReservationActivity extends AppCompatActivity {
     }
 
     private boolean allValid() {
-        return isEmailValid && isCardValid && isCVVValid && isDateValid;
+        return isEmailValid && isCardValid && isCVVValid ;
     }
 
 

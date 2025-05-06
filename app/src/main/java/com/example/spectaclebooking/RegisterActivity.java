@@ -1,3 +1,4 @@
+/*
 package com.example.spectaclebooking;
 
 import android.content.Intent;
@@ -166,7 +167,9 @@ public class RegisterActivity extends AppCompatActivity {
             SignupRequest request = new SignupRequest(lastName, firstName, telNumber, email, password);
 
             ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
-           Call<SignupResponse> call = apiService.registerClient(request);
+           */
+/*Call<SignupResponse> call = apiService.registerClient(request);*//*
+
 
             call.enqueue(new Callback<SignupResponse>() {
                 @Override
@@ -227,4 +230,4 @@ public class RegisterActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-}
+}*/
